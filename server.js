@@ -51,6 +51,9 @@ io.on('connection', function(socket){
     });
 });
 
+app.get('/front', function(req, res){
+  res.sendFile(__dirname + '/frontend.html');
+});
 
 
 http.listen(3000, function(){
