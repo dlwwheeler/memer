@@ -6,7 +6,8 @@
   "dependencies": {
     "express": "^4.16.4",
     "socket.io": "^2.2.0",
-    "socket.io-client": "^2.2.0"
+    "socket.io-client": "^2.2.0",
+    "vuetify": "^1.5.11"
   },
   "devDependencies": {},
   "scripts": {
