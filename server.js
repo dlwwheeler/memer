@@ -2,6 +2,8 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var fs = require('fs');
+var path = require('path')
+
 
 
 app.get('/', function(req, res){
@@ -10,17 +12,33 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
     socket.on('sendMeme', function(socket){
-      fs.readdir(__dirname, function(err, folders) {
-      var randFolder = folders[Math.floor(Math.random() * folders.length)];
-      fs.readdir(__dirname+randFolder,function(err,files)) {
-        randFile = files[Math.floor(Math.random() * files.length)]
-      })
+      filePath = __dirname + '\\memes';
+      console.log(filePath)
+      fs.readdir(filePath, function(err, folders) {
+        var randFolder = folders[Math.floor(Math.random() * folders.length)];
+        while(path.extname(randFolder) == '.ini')
+          randFolder = folders[Math.floor(Math.random() * folders.length)];
+        filePath += '\\' + randFolder + '\\';
+        console.log(filePath, 'This is the file path')
+        fs.readdir(filePath,function(err,files) {
+
+          var randFile = files[Math.floor(Math.random() * files.length)]
+          while(path.extname(randFile) == '.ini')
+            randFile = files[Math.floor(Math.random() * files.length)];
+
+          filePath+=randFile;
+          console.log(filePath + "this is the file");
+            fs.readFile(filePath, function(err, data) {
+              console.log(data)
+              io.emit('getMeme', {image:true, buffer: data.toString('base64')})
+          });
+        });
+      });
+    });
 });
 
       //io.emit("SWAG", { image: true, buffer: buf.toString('base64') });
-    })
 
-});
 
 
 
