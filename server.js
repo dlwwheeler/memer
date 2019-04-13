@@ -59,7 +59,9 @@ io.on('connection', function(socket){
 
       //io.emit("SWAG", { image: true, buffer: buf.toString('base64') });
 
-
+app.get('/front', function(req, res){
+  res.sendFile(__dirname + '/frontend.html');
+});
 
 
 http.listen(3000, function(){
