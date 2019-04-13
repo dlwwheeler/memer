@@ -4,6 +4,24 @@ var io = require('socket.io')(http);
 var fs = require('fs');
 var path = require('path')
 
+//Name: randomMeme, expects folder, returns filename
+//Purpose: returns a random meme when the user fails to get a top 4
+function randomMeme(folders)
+{
+  var randFolder = folders[Math.floor(Math.random() * folders.length)];
+  while(path.extname(randFolder) == '.ini')
+  {
+    randFolder = folders[Math.floor(Math.random() * folders.length)];
+  }
+  filePath += '\\' + randFolder + '\\';
+  fs.readdir(filePath,function(err,files) {
+
+    var randFile = files[Math.floor(Math.random() * files.length)]
+    while(path.extname(randFile) == '.ini')
+    {
+      randFile = files[Math.floor(Math.random() * files.length)];
+    }
+}
 
 
 app.get('/', function(req, res){
@@ -11,27 +29,28 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-    socket.on('sendMeme', function(data){
-      if(data.intailized == false)
+    socket.on('sendMeme', function(userProfile){
+
       filePath = __dirname + '\\memes';
       console.log(filePath)
       fs.readdir(filePath, function(err, folders) {
-        var randFolder = folders[Math.floor(Math.random() * folders.length)];
-        while(path.extname(randFolder) == '.ini')
-          randFolder = folders[Math.floor(Math.random() * folders.length)];
-        filePath += '\\' + randFolder + '\\';
-        console.log(filePath, 'This is the file path')
-        fs.readdir(filePath,function(err,files) {
+        if(userProfile.initalized == false)
+        {
+          for(folder of folders)
+          {
+            if(path.extname(folder) != '.ini')
+              userProfile.profile[folder] = 0;
+          }
+        }
 
-          var randFile = files[Math.floor(Math.random() * files.length)]
-          while(path.extname(randFile) == '.ini')
-            randFile = files[Math.floor(Math.random() * files.length)];
+
+
 
           filePath+=randFile;
-          console.log(filePath + "this is the file");
             fs.readFile(filePath, function(err, data) {
               console.log(data)
-              io.emit('getMeme', {image:true, buffer: data.toString('base64')})
+              io.emit('getMeme', {image:true, buffer: data.toString('base64'),
+                                  userProfile: userProfile})
           });
         });
       });
