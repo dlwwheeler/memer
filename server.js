@@ -6,59 +6,50 @@ var path = require('path')
 
 //Name: randomMeme, expects folder, returns filename
 //Purpose: returns a random meme when the user fails to get a top 4
-function randomMeme(folders)
-{
-  var randFolder = folders[Math.floor(Math.random() * folders.length)];
-  while(path.extname(randFolder) == '.ini')
+ function randomFile(filePath) {
+  randFile = ""
+  files = fs.readdirSync(filePath)
+  var randFile = files[Math.floor(Math.random() * files.length)]
+  while(path.extname(randFile) == '.ini')
   {
-    randFolder = folders[Math.floor(Math.random() * folders.length)];
+    randFile = files[Math.floor(Math.random() * files.length)];
   }
-  filePath += '\\' + randFolder + '\\';
-  fs.readdir(filePath,function(err,files) {
+  return randFile
 
-    var randFile = files[Math.floor(Math.random() * files.length)]
-    while(path.extname(randFile) == '.ini')
-    {
-      randFile = files[Math.floor(Math.random() * files.length)];
-    }
 }
 
 
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  res.sendFile(__dirname + '/test.html');
 });
 
 io.on('connection', function(socket){
-    socket.on('sendMeme', function(userProfile){
+  socket.on('sendMeme', function(userProfile){
 
-      filePath = __dirname + '\\memes';
-      console.log(filePath)
-      fs.readdir(filePath, function(err, folders) {
-        if(userProfile.initalized == false)
+    filePath = __dirname + '\\memes'; //sets up teh file path
+    fs.readdir(filePath, function(err, folders) {
+      if(userProfile.initalized == false)
+      {
+        for(folder of folders)
         {
-          for(folder of folders)
-          {
-            if(path.extname(folder) != '.ini')
-              userProfile.profile[folder] = 0;
-          }
+          if(path.extname(folder) != '.ini')
+            userProfile.profile[folder] = 0;
         }
+      }
+    })
+    filePath +=  '\\' + randomFile(filePath)
+    filePath += '\\' + randomFile(filePath)
 
+    //filePath += randomFile(filePath)
+   // gets a random folder from "memes"
 
-
-
-          filePath+=randFile;
-            fs.readFile(filePath, function(err, data) {
-              console.log(data)
-              io.emit('getMeme', {image:true, buffer: data.toString('base64'),
-                                  userProfile: userProfile})
-          });
-        });
-      });
+    //filePath += randomFile(filePath) //Gets a random meme from that folder
+      fs.readFile(filePath, function(err, data) {
+        io.emit('getMeme', {image:true, buffer: data.toString('base64'),
+                            userProfile: userProfile})
+      })
     });
 });
-
-      //io.emit("SWAG", { image: true, buffer: buf.toString('base64') });
-
 
 
 
