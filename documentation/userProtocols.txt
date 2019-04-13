@@ -1,0 +1,57 @@
+﻿The documentation below outlines various figures in the user view.
+It is intended to show the intention behind each element in an abstract form
+but not the actual function. Use it as more of a cursory look into the code.
+
+Figure 1: 
+	Name:Dank Button
+	Use: DOM element for listening for user selection
+	Description:
+
+			1.increment affinity toward meme category by 1
+			2.store the user Profile in local storage
+			3.send the meme profile to the server
+			4.request a new meme from the server at your current profile
+				
+
+Figure 2:
+	Name:Steal button
+	use: Dom element indicating that the user wants to download the meme
+	Description:
+			download the current meme. That's all.
+
+Figure 3:
+	Name:Lame Button
+	Use: DOM element for the user to show they don't like the meme
+	Description: 
+			1.decrement affinity toward meme category by 1
+			2.store the meme profile in local storage
+			3.send the meme profile to the server
+			4.request a new meme from the server at current profile
+
+Figure 4:
+	Name:New Profile Button
+	Use: DOM element indicating that the user would like to make a new profile
+	Description:
+			1.Make a request to the server for a new profile at the given name
+			2.request the server to send you that profile
+			3.store that profile in local storage
+									//To do:merge both of these into one lazy
+										button
+
+Figure 5:
+	Name:Load Profile Button
+	Use: indicates that the user has an existing profile and wishes to load it by name
+	Description:
+			1.request that the server send you the profile at that name
+			2.store that profile in local storage
+			
+Figure 6:
+	Name:Shuffle Button
+	Use: User wishes to erase current profile at address
+	Description:
+			1.Set all profile preferances to 0
+			2.save profile to local storage 
+			3.Send new profile to server 
+			4.reload page
+			
+	

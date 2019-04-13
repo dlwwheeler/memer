@@ -1,0 +1,40 @@
+The layout of what the sever side code will look like. Basically these are all of the calls of
+"server.js"
+
+
+sendMeme(request type: get, path: '/memes')
+		1.server post request from '/'
+		
+		2.update user profile to match user's choice (on the server)
+
+		3.call "selectMeme" 
+
+		4.send the user a new meme to judge
+
+
+getProfile(request type: get,path: '/newUser')
+
+		1.server get request from '/newUser'
+		
+		2a.if no user profile with that name exists,
+
+		  	1.make a new folder for the user at the requested username
+		  	   at "/users/:username"
+
+		2b.If a user profile already exists
+
+			1.select and load the requested folder
+
+		3.initalize their profile with all of the meme folders
+		  names at value = 0 
+			-Note: take all of the names of the meme folders
+			       from /memes and add them to the users
+			       "memes" attribute 
+
+		4.create a session for them at their username
+
+		5.start sending them memes
+
+
+
+

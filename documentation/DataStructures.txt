@@ -1,0 +1,28 @@
+Abstract description of each data structure in the software along with 
+a description of how it is used.
+
+User:
+	Name: String representing the users profile in the system
+	Constructor:expects a users name
+	updateMeme(memeName, favor): function of the class that expects a meme name and favor
+					if there is no meme set for the user one is defaulted at either 1 or -1
+					depending on the users preference for the meme, via the property accessor
+					
+					if a meme does exist in the user profile, then all we do is increment or decrement
+					depending on their selection
+					
+					for an example of how the javascript property accessor works go here:
+					https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Property_accessors
+					
+	Notes:Meme attributes for the user are dynamically created via the "updateMeme" function
+		  and can be accessed something like this userName["memeName"] and that should return the value we want
+	
+Meme:
+	Name: The name of the Meme
+	Picture: The meme's picture as an image file
+	Notes: This should really be a very simple data structure to send and get. 
+		   All it was really made for is encapsulating the meme data for the user
+		   
+					
+	
+					
