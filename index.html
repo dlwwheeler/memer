@@ -17,6 +17,11 @@
         socket.emit('sendMeme')
       });
 
+      window.addEventListener('load',function() {
+        console.log('loadle)');
+        socket.emit('sendMeme', {initalized: false, profile: {} })
+      });
+
 
       socket.on("getMeme", function(data) {
         if(data.image == true)

@@ -11,7 +11,8 @@ app.get('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-    socket.on('sendMeme', function(socket){
+    socket.on('sendMeme', function(data){
+      if(data.intailized == false)
       filePath = __dirname + '\\memes';
       console.log(filePath)
       fs.readdir(filePath, function(err, folders) {
