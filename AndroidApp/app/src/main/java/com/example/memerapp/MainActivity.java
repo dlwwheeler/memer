@@ -38,6 +38,20 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //add a like to the image then set a new image
+        btnLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
+
+        //add a dislike to the image then set a new image
+        btnDislike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 }

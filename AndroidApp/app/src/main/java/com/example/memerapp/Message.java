@@ -1,43 +1,27 @@
 package com.example.memerapp;
 
-import android.media.Image;
+import android.graphics.Bitmap;
 
 //This should be what variables are stored in the back end.
 public class Message {
 
-    private String nickname;
-    private String message ;
-    //what should be what stores
-    private Image meme;
+    //what should be what stored
+    private Bitmap meme;
     private int likes;
     private int dislikes;
 
-    public Message(String nickname, String message) {
-        this.nickname = nickname;
-        this.message = message;
+    public Message(Bitmap meme, int likes, int dislikes) {
+        this.meme = meme;
+        this.likes = likes;
+        this.dislikes = dislikes;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Image getMeme() {
+    public Bitmap getMeme() {
         return meme;
     }
 
-    public void setMeme(Image meme) {
+    public void setMeme(Bitmap meme) {
         this.meme = meme;
     }
 
