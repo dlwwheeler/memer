@@ -1,0 +1,181 @@
+
+
+button{
+  background-color: color:red;
+}
+img{
+  padding-top: 4px;
+  display: block;
+  border-radius: 7px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  height: 300px;
+  text-align: center;
+  position:relative;
+
+}
+.centerPanel {
+  background: #fff;
+  padding: 30px;
+  position: relative;
+}
+
+.wrapper
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height:350px;
+  width: 350px;
+}
+.centerPanel {
+  background-color: #fff;
+  /* Need position to allow stacking of pseudo-elements */
+  position: relative;
+  /* Padding for demo purposes */
+  padding: 30px;
+}
+
+.centerPanel,
+.centerPanel::before,
+.centerPanel::after {
+  /* Add shadow to distinguish sheets from one another */
+  box-shadow: 2px 1px 1px rgba(0,0,0,0.15);
+}
+
+.centerPanel::before,
+.centerPanel::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #eee;
+}
+
+/* Second sheet of centerPanel */
+.centerPanel::before {
+  left: 7px;
+  top: 5px;
+  z-index: -1;
+}
+
+/* Third sheet of centerPanel */
+.centerPanel::after {
+  left: 12px;
+  top: 10px;
+  z-index: -2;
+}
+
+.dankButton {
+	-moz-box-shadow: 0px 0px 8px 4px #b5b5b5;
+	-webkit-box-shadow: 0px 0px 8px 4px #b5b5b5;
+	box-shadow: 0px 0px 8px 4px #b5b5b5;
+	background-color:#268a26;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	border:2px solid #3ab546;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:17px;
+	padding:23px 10px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.dankButton:hover {
+	background-color:#2da12d;
+}
+.dankButton:active {
+	position:relative;
+	top:1px;
+}
+
+
+.yeetButton {
+	-moz-box-shadow: 0px 0px 8px 4px #b5b5b5;
+	-webkit-box-shadow: 0px 0px 8px 4px #b5b5b5;
+	box-shadow: 0px 0px 8px 4px #b5b5b5;
+	background-color:#ff1a1a;
+	-moz-border-radius:42px;
+	-webkit-border-radius:42px;
+	border-radius:42px;
+	border:1px solid #ff1a1a;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Verdana;
+	font-size:17px;
+	padding:23px 14px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.yeetButton:hover {
+	background-color:#ff4d4d;
+}
+.yeetButton:active {
+	position:relative;
+	top:1px;
+}
+
+.steal {
+	-moz-box-shadow: 0px 1px 12px 7px #b0b0b0;
+	-webkit-box-shadow: 0px 1px 12px 7px #b0b0b0;
+	box-shadow: 0px 1px 12px 7px #b0b0b0;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffec64), color-stop(1, #ffab23));
+	background:-moz-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	background:-webkit-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	background:-o-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	background:-ms-linear-gradient(top, #ffec64 5%, #ffab23 100%);
+	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffec64', endColorstr='#ffab23',GradientType=0);
+	background-color:#ffec64;
+	-moz-border-radius:16px;
+	-webkit-border-radius:16px;
+	border-radius:16px;
+	border:1px solid #ffaa22;
+	display:inline-block;
+	cursor:pointer;
+	color:#333333;
+	font-family:Trebuchet MS;
+	font-size:15px;
+	font-weight:bold;
+	padding:14px 3px;
+  padding-left: 14px;
+  font-size: 22px;
+  letter-spacing: 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffee66;
+}
+.steal:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));
+	background:-moz-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	background:-webkit-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	background:-o-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	background:-ms-linear-gradient(top, #ffab23 5%, #ffec64 100%);
+	background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffab23', endColorstr='#ffec64',GradientType=0);
+	background-color:#ffab23;
+}
+.steal:active {
+	position:relative;
+	top:1px;
+}
+
+.buttonBar
+{
+  -webkit-align-content: center;
+  margin-top: 15px;
+  padding: 5px;
+  text-align:center;
+  display:block;
+  width: 100%;
+  border-radius: 15px;
+
+}
+
+button:focus {
+    outline:none;
+}

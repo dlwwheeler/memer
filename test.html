@@ -2,39 +2,133 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>title</title>
+    <title>Memer</title>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
 
 
-    <button id="sendMeme"> SEND IMAGE</button>
+
+    <div>
+        <button id="loadProfile"> Load profile </button>
+        <input id = "profileName"> </input>
+    </div>
+      <div>
+        <button id="uploadMeme"> Upload </button>
+        <input id="fileSelect"type="file" name="myFile">
+      </div>
+    <div class = "wrapper">
+      <div class="centerPanel">
+        <img href="/image.png" id="front"></img>
+      </div>
+      <div class = "buttonBar">
+        <button class="yeetButton" id="left">YEET</button>
+        <button class="steal" id="steal">STEAL</button>
+        <button class="dankButton"id="right">DANK</button>
+      </div>
+    </div>
+
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      var socket = io();
+      memeImage = document.getElementById('front')
       var profile = {}
+      var profileName = ""
+      var hasProfile = false;
+      var socket = io();
 
-      document.getElementById('sendMeme').addEventListener('click',function() {
-        socket.emit('sendMeme', {initalized: true, profile: profile })
+      document.getElementById('steal').addEventListener('click',function(){
+        var link = document.createElement('a');
+        link.href = memeImage.src;
+        link.download = 'Download.jpg';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+      document.getElementById('loadProfile').addEventListener('click',function() {
+        profileName = document.getElementById('profileName').value
+        if(profileName.includes(" ") || profileName == "")
+        {
+          alert("No spaces or empty names!")
+        }
+        else
+        {
+          socket.emit('getProfile',{profileName: profileName})
+        }
       });
+      document.getElementById('uploadMeme').addEventListener('click',function(){
+        var file    = document.querySelector('input[type=file]').files[0]
+        var reader  = new FileReader();
+
+         reader.onloadend = function () {
+           idx = reader.result.indexOf(',');
+           console.log(idx, "this is the index");
+           result =  reader.result.slice(idx+1);
+           console.log(result);
+           socket.emit('upload',result)
+         }
+         if (file) {
+          reader.readAsDataURL(file); //reads the data as a URL
+          console.log(reader);
+      } else {
+          file.src = "";
+      }
+
+      })
+
+      document.getElementById('right').addEventListener('click',function() {
+        category = memeImage.getAttribute("name")
+        profile[category] +=1
+        socket.emit('updateProfile',{profile: profile,profileName:profileName})
+        socket.emit('sendMeme', {profileName: profileName, profile:profile})
+      });
+      document.getElementById('left').addEventListener('click',function() {
+
+      });
+
+      document.addEventListener('keydown', function(event){
+        console.log(event.keyCode)
+        if(event.keyCode == '37')
+        {
+          document.getElementById('left').click()
+        }
+        else if(event.keyCode == '39')
+        {
+          document.getElementById('right').click()
+        }
+        if(event.keyCode == '40')
+        {
+          document.getElementById('steal').click()
+        }
+      })
 
       window.addEventListener('load',function() {
-        console.log('loadle)');
-        socket.emit('sendMeme', {initalized: false, profile: profile })
+        socket.emit('sendMeme', {profileName: ""})
       });
 
+      socket.on('getUpdate', function(data){
+        profile = data.profile
+        console.log(profile)
+      })
 
+      socket.on('sendProfile',function(data){
+        hasProfile = true;
+        profileName = data.name;
+        profile = data.profile;
+        console.log(profile, "this is the profile");
+
+      })
       socket.on("gotMeme", function(data) {
-        if(data.image == true)
-        {
 
-          console.log(data.userProfile)
-          console.log("help");
+          /*if(data.hasProfile == true)
+          {
+            socket.emit('updateProfile', {profile: Data})
+          }
+          console.log(profile)
           profile = data.userProfile;
-          var image = new Image();
-          image.src = 'data:image/png;base64,' + data.buffer;
-          document.body.appendChild(image);
-
-        }
+          */
+          console.log(profile)
+          memeImage.src = 'data:image/png;base64,' + data.buffer;
+          memeImage.setAttribute("name", data.category);
       })
     </script>
   </body>
