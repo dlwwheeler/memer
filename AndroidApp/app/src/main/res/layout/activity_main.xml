@@ -1,60 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.example.aymen.androidchat.MainActivity">
 
-    <ImageView
-        android:id="@+id/ivMeme"
-        android:layout_width="393dp"
-        android:layout_height="493dp"
-        tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="103dp"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
+    <EditText
+        android:id="@+id/nickname"
+        android:layout_centerInParent="true"
+        android:textSize="30dp"
+        android:hint="Enter your nickname !"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <Button
-        android:id="@+id/btnSteal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Button"
-        app:layout_constraintTop_toBottomOf="@+id/ivMeme"
-        tools:layout_editor_absoluteX="161dp" />
+        android:layout_below="@+id/nickname"
+        android:id="@+id/enterchat"
+        android:text="Go to chat "
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    <Button
-        android:id="@+id/btnNo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Button"
-        app:layout_constraintTop_toBottomOf="@+id/ivMeme"
-        tools:layout_editor_absoluteX="43dp" />
-
-    <Button
-        android:id="@+id/btnYes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Button"
-        app:layout_constraintTop_toBottomOf="@+id/ivMeme"
-        tools:layout_editor_absoluteX="278dp" />
-
-    <Switch
-        android:id="@+id/swFeed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Switch"
-        tools:layout_editor_absoluteX="164dp"
-        tools:layout_editor_absoluteY="47dp" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="288dp"
-        tools:layout_editor_absoluteY="25dp" />
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
