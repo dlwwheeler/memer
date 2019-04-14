@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+  </head>
+  <body>
+
+
+    <button id="sendMeme"> SEND IMAGE</button>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+
+
+      document.getElementById('sendMeme').addEventListener('click',function() {
+        socket.emit('sendMeme')
+      });
+
+      window.addEventListener('load',function() {
+        console.log('loadle)');
+        socket.emit('sendMeme', {initalized: false, profile: {} })
+      });
+
+
+      socket.on("getMeme", function(data) {
+        if(data.image == true)
+        {
+          console.log("help");
+          var image = new Image();
+          image.src = 'data:image/png;base64,' + data.buffer;
+          document.body.appendChild(image);
+
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "memer",
+  "version": "1.0.0",
+  "description": "A way to deliver trash memes as fast a humanly possible",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
+    "vuetify": "^1.5.11"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dlwwheeler/memer.git"
+  },
+  "keywords": [
+    "DAB"
+  ],
+  "author": "Abe, Devan, Jasmin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dlwwheeler/memer/issues"
+  },
+  "homepage": "https://github.com/dlwwheeler/memer#readme"
+}
