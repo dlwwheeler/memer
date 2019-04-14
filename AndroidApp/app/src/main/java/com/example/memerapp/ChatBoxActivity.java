@@ -1,12 +1,10 @@
 package com.example.memerapp;
 
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -37,42 +35,23 @@ public class ChatBoxActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_box);
 
-        messagetxt = (EditText) findViewById(R.id.message) ;
-        send = (Button)findViewById(R.id.send);
-        // get the nickame of the user
-        Nickname= (String)getIntent().getExtras().getString(MainActivity.NICKNAME);
         //connect you socket client to the server
         try {
-            socket = IO.socket("http://192.168.0.105:3000");
+            //ip f server
+            socket = IO.socket("http://137.150.172.9:3000");
             socket.connect();
             socket.emit("join", Nickname);
         } catch (URISyntaxException e) {
             e.printStackTrace();
 
         }
-        //setting up recyler
+        //setting up recycler
         MessageList = new ArrayList<>();
         myRecylerView = (RecyclerView) findViewById(R.id.messagelist);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         myRecylerView.setLayoutManager(mLayoutManager);
         myRecylerView.setItemAnimator(new DefaultItemAnimator());
 
-
-
-        // message send action
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //retrieve the nickname and the message content and fire the event messagedetection
-                if(!messagetxt.getText().toString().isEmpty()){
-                    socket.emit("messagedetection",Nickname,messagetxt.getText().toString());
-
-                    messagetxt.setText(" ");
-                }
-
-
-            }
-        });
 
         //implementing socket listeners
         socket.on("userjoinedthechat", new Emitter.Listener() {
