@@ -11,23 +11,25 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io();
-
+      var profile = {}
 
       document.getElementById('sendMeme').addEventListener('click',function() {
-        socket.emit('sendMeme')
+        socket.emit('sendMeme', {initalized: true, profile: profile })
       });
 
       window.addEventListener('load',function() {
         console.log('loadle)');
-        socket.emit('sendMeme', {initalized: false, profile: {} })
+        socket.emit('sendMeme', {initalized: false, profile: profile })
       });
 
 
-      socket.on("getMeme", function(data) {
+      socket.on("gotMeme", function(data) {
         if(data.image == true)
         {
+
           console.log(data.userProfile)
           console.log("help");
+          profile = data.userProfile;
           var image = new Image();
           image.src = 'data:image/png;base64,' + data.buffer;
           document.body.appendChild(image);

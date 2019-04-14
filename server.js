@@ -19,34 +19,75 @@ var path = require('path')
 }
 
 
+
+
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/test.html');
 });
 
 io.on('connection', function(socket){
-  socket.on('sendMeme', function(userProfile){
+  socket.on('sendMeme', function(reqData){
 
     filePath = __dirname + '\\memes'; //sets up teh file path
     fs.readdir(filePath, function(err, folders) {
-      if(userProfile.initalized == false)
+      console.log(reqData.profile + "this is the profile")
+      if(reqData.initalized == false)
       {
         for(folder of folders)
         {
           if(path.extname(folder) != '.ini')
-            userProfile.profile[folder] = 0;
+            reqData.profile[folder] = 0;
         }
       }
+      else
+      {
+        for(folder of folders)
+        {
+
+          if(path.extname(folder) != '.ini')
+          {
+
+            first = reqData.profile['1st'];
+            second = reqData.profile['2nd'];
+            third = reqData.profile['3rd'];
+            fourth = reqData.profile['4th'];
+            contender = reqData.profile[folder];
+            if(first == undefined || contender > reqData.profile[first])
+            {
+              reqData.profile['1st'] = folder;
+              console.log(reqData.profile['1st']);
+            }
+            else if(second == undefined || contender > reqData.profile[second])
+            {
+              reqData.profile['2nd'] = folder;
+            }
+            else if(third == undefined || contender > reqData.profile[third])
+            {
+              reqData.profile['3rd'] = folder;
+            }
+            else if(second == undefined || contender > reqData.profile[fourth])
+            {
+              reqData.profile['4th'] = folder;
+            }
+          }
+        }
+        console.log(reqData.profile)
+      }
     })
-    filePath +=  '\\' + randomFile(filePath)
-    filePath += '\\' + randomFile(filePath)
+    decision = Math.floor(Math.random() * 100);//Separate our probability space into a scale of 0-99
 
-    //filePath += randomFile(filePath)
-   // gets a random folder from "memes"
 
-    //filePath += randomFile(filePath) //Gets a random meme from that folder
+      filePath +=  '\\' + randomFile(filePath) //get a random folder
+      filePath += '\\' + randomFile(filePath) // get a random image
+
+
+
+
+
+    //Gets a random meme from that folder
       fs.readFile(filePath, function(err, data) {
-        io.emit('getMeme', {image:true, buffer: data.toString('base64'),
-                            userProfile: userProfile})
+        io.emit('gotMeme', {image:true, buffer: data.toString('base64'),
+                            userProfile: reqData.profile,initalized:true} )
       })
     });
 });
