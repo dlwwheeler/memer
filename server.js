@@ -3,6 +3,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var fs = require('fs');
 var path = require('path')
+var os = require('os');
+
 
 //Name: randomMeme, expects folder, returns filename
 //Purpose: returns a random meme when the user fails to get a top 4
@@ -28,7 +30,16 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   socket.on('sendMeme', function(reqData){
 
-    filePath = __dirname + '\\memes'; //sets up teh file path
+    if(os.platform() == 'win32')
+    {
+      slash = '\\'
+    }
+    else
+    {
+      slash = '/'
+    }
+
+    filePath = __dirname + slash +'memes'; //sets up teh file path
     fs.readdir(filePath, function(err, folders) {
       console.log(reqData.profile + "this is the profile")
       if(reqData.initalized == false)
@@ -77,8 +88,8 @@ io.on('connection', function(socket){
     decision = Math.floor(Math.random() * 100);//Separate our probability space into a scale of 0-99
 
 
-      filePath +=  '\\' + randomFile(filePath) //get a random folder
-      filePath += '\\' + randomFile(filePath) // get a random image
+      filePath +=  slash + randomFile(filePath) //get a random folder
+      filePath += slash+ randomFile(filePath) // get a random image
 
 
 
