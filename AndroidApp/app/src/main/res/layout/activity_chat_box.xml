@@ -3,19 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.example.memerapp.ChatBoxActivity">
     <LinearLayout
         android:weightSum="3"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <android.support.v7.widget.RecyclerView
-            android:layout_weight="3"
-            android:id="@+id/messagelist"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:scrollbars="vertical"/>
+
         <View
             android:layout_marginTop="5mm"
             android:id="@+id/separator"
@@ -23,26 +18,38 @@
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"/>
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/messagelist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
+
         <LinearLayout
             android:weightSum="3"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <EditText
+            <EditText
 
-            android:id="@+id/message"
-            android:layout_weight="3"
-            android:layout_width="wrap_content"
-            android:hint="your message"
-            android:layout_height="match_parent" />
+                android:id="@+id/message"
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:hint="your message"
 
-        <Button
-            android:id="@+id/send"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:text="send" /></LinearLayout>
+                android:layout_height="match_parent" />
 
-</LinearLayout>
+            <Button
+
+                android:id="@+id/send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:text="send"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
 </RelativeLayout>

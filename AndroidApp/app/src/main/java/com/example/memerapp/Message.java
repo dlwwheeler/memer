@@ -1,5 +1,6 @@
 package com.example.memerapp;
 
+
 public class Message {
 
     private String nickname;
